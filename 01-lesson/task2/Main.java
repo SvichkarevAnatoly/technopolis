@@ -1,52 +1,54 @@
 package task2;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.StringTokenizer;
 
-// нужен принтврайтер
-
-// https://www.e-olymp.com/ru/problems/3966
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("sdf");
-    }
-}
+    FastScanner in;
+    PrintWriter out;
 
-class Solver {
-    private final Scanner in;
-    private final int m;
-    private List<Integer> collection;
+    public void solve() throws IOException {
 
-    public Solver(List<Integer> collection, int m, Scanner in) {
-        this.collection = collection;
-        this.m = m;
-        this.in = in;
     }
 
-    public Answer solve() {
-        for (int i = 0; i < m; i++) {
-            final int ind = in.nextInt();
+    public void run() {
+        try {
+            in = new FastScanner();
+            out = new PrintWriter(System.out);
 
+            solve();
+
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return new Answer();
     }
-}
 
-class InputReader {
-    public int n;
-    public List<Integer> collection = new ArrayList<>();
-    public int m;
+    class FastScanner {
+        BufferedReader br;
+        StringTokenizer st;
 
-    public InputReader(Scanner in) {
-        n = in.nextInt();
-        for (int i = 0; i < n; i++) {
-            collection.add(in.nextInt());
+        FastScanner() {
+            br = new BufferedReader(new InputStreamReader(System.in));
         }
-        m = in.nextInt();
-    }
-}
 
-class Answer {
-    public List<String> yesnos = new ArrayList<>();
+        String next() {
+            while (st == null || !st.hasMoreTokens()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+    }
+
+    public static void main(String[] arg) {
+        new Main().run();
+    }
 }
