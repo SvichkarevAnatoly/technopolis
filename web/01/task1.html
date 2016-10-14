@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Basic Bootstrap Template</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <!--panel1-->
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#lesson1">
+                        <strong>Лекция №1:</strong>
+                        О программе курса.
+                        Архитектура веб-приложений.
+                        HTML
+                    </a>
+                </h4>
+            </div>
+            <div id="lesson1" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Понятие URL и документа.
+                    Абсолютные и относительные URL.
+                    Клиент-серверная архитектура.
+                    Основы HTML разметки.
+                </div>
+            </div>
+        </div>
+        <!--panel2-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#lesson2">
+                        <strong>Лекция №2:</strong>
+                        Верстка с использованием Bootstrap
+                    </a>
+                </h4>
+            </div>
+            <div id="lesson2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    CSS селекторы и стили.
+                    Приоритеты стилей и каскадирование.
+                    Позиционирование элементов.
+                    Использование Twitter Bootstrap
+                </div>
+            </div>
+        </div>
+        <!--panel3-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#lesson3">
+                        <strong>Лекция №3:</strong>
+                        Сетевые протоколы. HTTP
+                    </a>
+                </h4>
+            </div>
+            <div id="lesson3" class="panel-collapse collapse">
+                <div class="panel-body">
+                    DNS, TCP, TSL.
+                    Синтаксис HTTP запросов и ответов.
+                    Методы и коды ответа HTTP.
+                    Заголовки HTTP
+                </div>
+            </div>
+        </div>
+        <!--panel4-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#lesson4">
+                        <strong>Лекция №4:</strong>
+                        Веб-сервера. Создание рабочего окружения
+                    </a>
+                </h4>
+            </div>
+            <div id="lesson4" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Файлы и процессы сервера.
+                    Внутренняя архитектура сервера.
+                    Примеры конфигурации. Понятие location.
+                    Методы обработки сетевых соединений
+                </div>
+            </div>
+        </div>
+        <!--panel5-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#lesson5">
+                        <strong>Контрольное занятие №1:</strong>
+                        Контрольное занятие
+                    </a>
+                </h4>
+            </div>
+            <div id="lesson5" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Проверка домашних заданий.
+                </div>
+            </div>
+        </div>
+        <!--panel6-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#lesson6">
+                        <strong>Смешанное занятие №1:</strong>
+                        Application сервера.
+                        MVC Фреймворки.
+                        CУБД и Django
+                    </a>
+                </h4>
+            </div>
+            <div id="lesson6" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Архитектура frontend - backend.
+                    Application сервера.
+                    Протоколы CGI, FastCGI, WSGI.
+                    Компоненты MVC.
+                    Структура Django проекта.
+                    Конфигурация проектов.
+                    Маршрутизация URL.
+                    Контроллеры в Django.
+                    Объекты HttpRequest и HttpResponse.
+                    Работа с HTTP заголовками в Django.
+                    Декораторы. Шаблонизация в Django.
+                    Работа с СУБД в Python.
+                    Работа с СУБД в Django. QuerySet.
+                    ModelManagers. Миграции баз данных.
+                    Проектирование баз данных.
+                    Загрузка данных из базы.
+                    Создание и изменение объектов
+                </div>
+            </div>
+        </div>
+        <!--panel7-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#lesson7">
+                        <strong>Семинар №1:</strong>
+                        Работа с базой данных
+                    </a>
+                </h4>
+            </div>
+            <div id="lesson7" class="panel-collapse collapse">
+                <div class="panel-body">
+                    TODO
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>
