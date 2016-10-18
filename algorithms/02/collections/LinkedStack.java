@@ -9,13 +9,16 @@ public class LinkedStack<Item> implements IStack<Item> {
 
     @Override
     public void push(Item item) {
-        /* TODO: implement it */
+        head = new Node<>(item, head);
+        size++;
     }
 
     @Override
     public Item pop() {
-        /* TODO: implement it */
-        return null;
+        final Item item = head.item;
+        head = head.next;
+        size--;
+        return item;
     }
 
     @Override
@@ -34,17 +37,18 @@ public class LinkedStack<Item> implements IStack<Item> {
     }
 
     private class LinkedStackIterator implements Iterator<Item> {
+        private Node<Item> curPos = head;
 
         @Override
         public boolean hasNext() {
-            /* TODO: implement it */
-            return false;
+            return curPos != null;
         }
 
         @Override
         public Item next() {
-            /* TODO: implement it */
-            return null;
+            final Item curItem = curPos.item;
+            curPos = curPos.next;
+            return curItem;
         }
 
     }
