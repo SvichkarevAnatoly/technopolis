@@ -1,5 +1,7 @@
 package other;
 
+import collections.ArrayStack;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,26 +9,53 @@ import java.io.InputStreamReader;
 /**
  * 1. пустая строка — правильная скобочная последовательность;
  * 2. правильная скобочная последовательность,
- *      взятая в скобки одного типа — правильная скобочная последовательность;
+ * взятая в скобки одного типа — правильная скобочная последовательность;
  * 3. правильная скобочная последовательность,
- *      к которой приписана слева или справа правильная скобочная последовательность
- *      — тоже правильная скобочная последовательность.
+ * к которой приписана слева или справа правильная скобочная последовательность
+ * — тоже правильная скобочная последовательность.
  */
 public class ParenthesesSequenceExt {
 
     private static final String QUIT = "q";
 
-    private static final char LEFT_PAREN     = '(';
-    private static final char RIGHT_PAREN    = ')';
-    private static final char LEFT_BRACE     = '{';
-    private static final char RIGHT_BRACE    = '}';
-    private static final char LEFT_BRACKET   = '[';
-    private static final char RIGHT_BRACKET  = ']';
+    private static final char LEFT_PAREN = '(';
+    private static final char RIGHT_PAREN = ')';
+    private static final char LEFT_BRACE = '{';
+    private static final char RIGHT_BRACE = '}';
+    private static final char LEFT_BRACKET = '[';
+    private static final char RIGHT_BRACKET = ']';
 
     // sequence = "()()" | "(({}[]))[[[" | "{}" | ...
-    private static boolean isBalanced(String sequence) {
-        /* TODO: implement it */
-        return false;
+    public static boolean isBalanced(String sequence) {
+        final ArrayStack<Character> charStack = new ArrayStack<>();
+        for (int i = 0; i < sequence.length(); i++) {
+            final char curChar = sequence.charAt(i);
+            char right = 0;
+            switch (curChar) {
+                case LEFT_PAREN:
+                case LEFT_BRACE:
+                case LEFT_BRACKET:
+                    charStack.push(curChar);
+                    break;
+                case RIGHT_PAREN:
+                    right = LEFT_PAREN;
+                    break;
+                case RIGHT_BRACE:
+                    right = LEFT_BRACE;
+                    break;
+                case RIGHT_BRACKET:
+                    right = LEFT_BRACKET;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Please use only available chars");
+            }
+            if (right != 0) {
+                if (charStack.isEmpty() || right != charStack.pop()) {
+                    return false;
+                }
+            }
+        }
+        return charStack.isEmpty();
     }
 
     public static void main(String[] args) {
