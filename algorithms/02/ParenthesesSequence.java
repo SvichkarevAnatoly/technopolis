@@ -19,8 +19,23 @@ public class ParenthesesSequence {
 
     // sequence = "()()" | "((((" | ")()(" | ...
     private static boolean isBalanced(String sequence) {
-        /* TODO: implement it */
-        return false;
+        int unclosed = 0;
+        for (int i = 0; i < sequence.length(); i++) {
+            switch (sequence.charAt(i)) {
+                case LEFT_PAREN:
+                    unclosed++;
+                    break;
+                case RIGHT_PAREN:
+                    unclosed--;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Please use only ( or )");
+            }
+            if (unclosed < 0) {
+                return false;
+            }
+        }
+        return unclosed == 0;
     }
 
     public static void main(String[] args) {
