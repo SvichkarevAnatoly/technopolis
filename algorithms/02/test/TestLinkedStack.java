@@ -31,6 +31,16 @@ public class TestLinkedStack {
     }
 
     @Test
+    public void peek() {
+        final LinkedStack<Integer> stack = new LinkedStack<>();
+        stack.push(5);
+        assertEquals(1, stack.size());
+        assertEquals(5, (int) stack.peek());
+        assertEquals(1, stack.size());
+        assertEquals(5, (int) stack.peek());
+    }
+
+    @Test
     public void iterator() throws Exception {
         final LinkedStack<Integer> stack = new LinkedStack<>();
         stack.push(1);

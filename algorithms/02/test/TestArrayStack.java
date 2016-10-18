@@ -27,6 +27,16 @@ public class TestArrayStack {
     }
 
     @Test
+    public void peek() {
+        final ArrayStack<Integer> stack = new ArrayStack<>();
+        stack.push(5);
+        assertEquals(1, stack.size());
+        assertEquals(5, (int) stack.peek());
+        assertEquals(1, stack.size());
+        assertEquals(5, (int) stack.peek());
+    }
+
+    @Test
     public void growShrink() throws Exception {
         final ArrayStack<Integer> stack = new ArrayStack<>();
         assertEquals(0, stack.size());

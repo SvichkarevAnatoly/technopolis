@@ -9,6 +9,8 @@ public interface IStack<Item> extends Iterable<Item> {
 
     Item pop();
 
+    Item peek();
+
     boolean isEmpty();
 
     int size();

@@ -14,6 +14,11 @@ public class LinkedStack<Item> implements IStack<Item> {
     }
 
     @Override
+    public Item peek() {
+        return head.item;
+    }
+
+    @Override
     public Item pop() {
         final Item item = head.item;
         head = head.next;

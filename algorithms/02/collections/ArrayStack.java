@@ -28,6 +28,11 @@ public class ArrayStack<Item> implements IStack<Item> {
     }
 
     @Override
+    public Item peek() {
+        return elementData[size - 1];
+    }
+
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
