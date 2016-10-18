@@ -1,3 +1,5 @@
+package other;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,21 +12,32 @@ import java.io.InputStreamReader;
  *      к которой приписана слева или справа правильная скобочная последовательность
  *      — тоже правильная скобочная последовательность.
  */
-public class ParenthesesSequenceExt {
+public class ParenthesesSequence {
 
     private static final String QUIT = "q";
 
     private static final char LEFT_PAREN     = '(';
     private static final char RIGHT_PAREN    = ')';
-    private static final char LEFT_BRACE     = '{';
-    private static final char RIGHT_BRACE    = '}';
-    private static final char LEFT_BRACKET   = '[';
-    private static final char RIGHT_BRACKET  = ']';
 
-    // sequence = "()()" | "(({}[]))[[[" | "{}" | ...
-    private static boolean isBalanced(String sequence) {
-        /* TODO: implement it */
-        return false;
+    // sequence = "()()" | "((((" | ")()(" | ...
+    public static boolean isBalanced(String sequence) {
+        int unclosed = 0;
+        for (int i = 0; i < sequence.length(); i++) {
+            switch (sequence.charAt(i)) {
+                case LEFT_PAREN:
+                    unclosed++;
+                    break;
+                case RIGHT_PAREN:
+                    unclosed--;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Please use only ( or )");
+            }
+            if (unclosed < 0) {
+                return false;
+            }
+        }
+        return unclosed == 0;
     }
 
     public static void main(String[] args) {
