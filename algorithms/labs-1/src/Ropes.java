@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+// https://www.e-olymp.com/ru/problems/5333
 public class Ropes {
     public static int getMaxLength(int[] ropeLengths, int k) {
         final int maxBound = getMaxBound(ropeLengths, k);
