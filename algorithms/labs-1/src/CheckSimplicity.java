@@ -1,13 +1,21 @@
 import java.util.Scanner;
 
-public class CheckSimplicity{
-    public static boolean check(int n) {
-        return false;
+// https://www.e-olymp.com/ru/problems/3917
+public class CheckSimplicity {
+    public static boolean isPrime(int n) {
+        final int sqrtN = (int) Math.sqrt(n);
+        for (int i = 2; i <= sqrtN; i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static void main(String[] args) {
         final Scanner scanner = new Scanner(System.in);
         final int n = scanner.nextInt();
-
+        final String answer = isPrime(n) ? "True" : "False";
+        System.out.println(answer);
     }
 }
