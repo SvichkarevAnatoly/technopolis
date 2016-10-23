@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class CheckerHeap {
-    public static boolean isHeap(int[] heap) {
+    public static boolean isHeap(long[] heap) {
         final int n = heap.length;
         for (int i = 0; i < (n + 2) / 2; i++) {
             if ((2 * i + 1) < n) {
@@ -21,7 +21,7 @@ public class CheckerHeap {
     public static void main(String[] args) {
         final Scanner scanner = new Scanner(System.in);
         final int n = scanner.nextInt();
-        final int[] heap = new int[n];
+        final long[] heap = new long[n];
         for (int i = 0; i < n; i++) {
             heap[i] = scanner.nextInt();
         }
