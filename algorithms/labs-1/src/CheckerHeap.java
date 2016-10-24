@@ -23,7 +23,7 @@ public class CheckerHeap {
         final int n = scanner.nextInt();
         final long[] heap = new long[n];
         for (int i = 0; i < n; i++) {
-            heap[i] = scanner.nextInt();
+            heap[i] = scanner.nextLong();
         }
 
         System.out.println(isHeap(heap) ? "YES" : "NO");
