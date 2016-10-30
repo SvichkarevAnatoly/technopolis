@@ -1,4 +1,4 @@
-package test;
+package test.collections;
 
 import collections.LinkedStack;
 import org.junit.Test;
@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class TestLinkedStack {
+public class LinkedStackTest {
     @Test
     public void constructor() {
         final LinkedStack<Integer> stack = new LinkedStack<>();

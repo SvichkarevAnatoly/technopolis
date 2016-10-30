@@ -1,11 +1,11 @@
-package test;
+package test.collections;
 
 import collections.ArrayStack;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestArrayStack {
+public class ArrayStackTest {
     @Test
     public void constructor() {
         final ArrayStack<Integer> stack = new ArrayStack<>();
