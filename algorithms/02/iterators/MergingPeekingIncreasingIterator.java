@@ -14,25 +14,41 @@ import java.util.Iterator;
  *  k — суммарное количество элементов
  */
 public class MergingPeekingIncreasingIterator implements Iterator<Integer> {
+    private final Comparator<IPeekingIterator<Integer>> comparator = (p1, p2) -> p1.peek().compareTo(p2.peek());
+    private final IPeekingIterator<Integer>[] iterators;
 
-    private Comparator<PeekingIncreasingIterator> comparator = (p1, p2) -> p1.peek().compareTo(p2.peek());
-
-    public MergingPeekingIncreasingIterator(IPeekingIterator... peekingIterator) {
-        /* TODO: implement it */
-//        for (int i = 0; i < peekingIterator.length; i++) {
-//            peekingIterator[i].hasNext();
-//        }
+    @SafeVarargs
+    public MergingPeekingIncreasingIterator(IPeekingIterator<Integer> ... peekingIterators) {
+        this.iterators = peekingIterators;
     }
 
     @Override
     public boolean hasNext() {
-        /* TODO: implement it */
+        for (IPeekingIterator iterator : iterators) {
+            if (iterator.hasNext()) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public Integer next() {
-        /* TODO: implement it */
-        return null;
+        IPeekingIterator<Integer> minElementIterator = null;
+        for (IPeekingIterator<Integer> iterator : iterators) {
+            if (iterator.hasNext()) {
+                minElementIterator = iterator;
+                break;
+            }
+        }
+
+        for (IPeekingIterator<Integer> iterator : iterators) {
+            if (iterator.hasNext()) {
+                if(comparator.compare(iterator, minElementIterator) < 0){
+                    minElementIterator = iterator;
+                }
+            }
+        }
+        return minElementIterator.next();
     }
 }

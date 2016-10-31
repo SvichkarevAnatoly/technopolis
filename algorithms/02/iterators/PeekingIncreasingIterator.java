@@ -1,5 +1,7 @@
 package iterators;
 
+import java.util.Random;
+
 public class PeekingIncreasingIterator extends IncreasingIterator implements IPeekingIterator<Integer> {
 
     private boolean hasPeeked;
@@ -7,6 +9,10 @@ public class PeekingIncreasingIterator extends IncreasingIterator implements IPe
 
     public PeekingIncreasingIterator(int start, int maxGrowth, int stepLimit) {
         super(start, maxGrowth, stepLimit);
+    }
+
+    public PeekingIncreasingIterator(int start, int maxGrowth, int stepLimit, Random random) {
+        super(start, maxGrowth, stepLimit, random);
     }
 
     @Override
