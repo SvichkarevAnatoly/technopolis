@@ -22,8 +22,6 @@ public class Queue {
 
     public int pop() {
         final int item = elementData[head];
-        // for debug
-        elementData[head] = 0;
         head = (head + 1) % DEFAULT_CAPACITY;
         return item;
     }
