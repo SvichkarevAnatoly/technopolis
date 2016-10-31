@@ -8,36 +8,64 @@ public class TwoStackQueue<Item> implements IQueue<Item> {
     private IStack<Item> stack2;
 
     public TwoStackQueue() {
-        /* TODO: implement it */
+        stack1 = new ArrayStack<>();
+        stack2 = new ArrayStack<>();
     }
 
     @Override
     public void enqueue(Item item) {
-        /* TODO: implement it */
+        stack1.push(item);
     }
 
     @Override
     public Item dequeue() {
-        /* TODO: implement it */
-        return null;
+        if (stack2.isEmpty()) {
+            while (!stack1.isEmpty()) {
+                stack2.push(stack1.pop());
+            }
+        }
+        return stack2.pop();
     }
 
     @Override
     public boolean isEmpty() {
-        /* TODO: implement it */
-        return true;
+        return stack1.isEmpty() && stack2.isEmpty();
     }
 
     @Override
     public int size() {
-        /* TODO: implement it */
-        return 0;
+        return stack1.size() + stack2.size();
     }
 
     @Override
     public Iterator<Item> iterator() {
-        /* TODO: implement it (optional) */
-        return null;
+        return new TwoStackQueueIterator();
     }
 
+    private class TwoStackQueueIterator implements Iterator<Item> {
+        private Iterator<Item> stack2Iterator = stack2.iterator();
+        private Iterator<Item> stack1RevIterator;
+
+        public TwoStackQueueIterator() {
+            final IStack<Item> tmp = new ArrayStack<>();
+            for (Item aStack1 : stack1) {
+                tmp.push(aStack1);
+            }
+            stack1RevIterator = tmp.iterator();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return stack2Iterator.hasNext() || stack1RevIterator.hasNext();
+        }
+
+        @Override
+        public Item next() {
+            if (stack2Iterator.hasNext()) {
+                return stack2Iterator.next();
+            } else {
+                return stack1RevIterator.next();
+            }
+        }
+    }
 }
