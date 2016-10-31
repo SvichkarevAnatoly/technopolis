@@ -4,20 +4,28 @@ import java.util.Iterator;
 
 public class LinkedQueue<Item> implements IQueue<Item> {
 
-    // -> [tail -> .. -> .. -> head] ->
     private Node<Item> head;
     private Node<Item> tail;
     private int size;
 
     @Override
     public void enqueue(Item item) {
-        /* TODO: implement it */
+        final Node<Item> tmp = tail;
+        tail = new Node<>(item);
+        if (isEmpty()) {
+            head = tail;
+        } else {
+            tmp.next = tail;
+        }
+        size++;
     }
 
     @Override
     public Item dequeue() {
-        /* TODO: implement it */
-        return null;
+        size--;
+        final Item value = head.item;
+        head = head.next;
+        return value;
     }
 
     @Override
@@ -37,16 +45,18 @@ public class LinkedQueue<Item> implements IQueue<Item> {
 
     private class LinkedQueueIterator implements Iterator<Item> {
 
+        private Node<Item> current = head;
+
         @Override
         public boolean hasNext() {
-            /* TODO: implement it */
-            return false;
+            return current != null;
         }
 
         @Override
         public Item next() {
-            /* TODO: implement it */
-            return null;
+            final Item item = current.item;
+            current = current.next;
+            return item;
         }
 
     }
