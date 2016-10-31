@@ -1,100 +1,140 @@
 package collections;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 
 public class ArrayPriorityQueue<Key extends Comparable<Key>> implements IPriorityQueue<Key> {
-
-    private Key[] elementData;
+    private static final int DEFAULT_CAPACITY = 10;
+    @SuppressWarnings("unchecked")
+    private Key[] elementData = (Key[]) new Comparable[DEFAULT_CAPACITY];
     private Comparator<Key> comparator;
+    private int size;
 
     public ArrayPriorityQueue() {
-        /* TODO: implement it — O(n) */
     }
 
     public ArrayPriorityQueue(Comparator<Key> comparator) {
-        /* TODO: implement it — O(n) */
         this.comparator = comparator;
     }
 
     @Override
     public void add(Key key) {
-        /* TODO: implement it — O(log n) */
+        grow();
+        elementData[size++] = key;
+        siftUp();
     }
 
     @Override
     public Key peek() {
-        /**
-         * TODO: implement it — O(1)
-         * Посмотреть на минимальный элемент
-         */
-        return null;
+        return elementData[0];
     }
 
     @Override
     public Key extractMin() {
-        /**
-         * TODO: implement it — O(log n)
-         * Достать минимальный элемент
-         *  и перестроить кучу
-         */
-        return null;
+        shrink();
+        Key max = elementData[0];
+        elementData[0] = elementData[--size];
+        siftDown();
+        return max;
     }
 
     @Override
     public boolean isEmpty() {
-        /* TODO: implement it */
-        return false;
+        return size == 0;
     }
 
     @Override
     public int size() {
-        /* TODO: implement it */
-        return 0;
+        return size;
     }
 
     private void siftUp() {
-        /**
-         * TODO: implement it — O(log n)
-         * Просеивание вверх —
-         *  подъём элемента больше родителей
-         */
+        int curIndex = size - 1;
+        if (curIndex != 0) {
+            int parentIndex;
+            do {
+                parentIndex = (curIndex - 1) / 2;
+                if (greater(parentIndex, curIndex)) {
+                    Key tmp = elementData[parentIndex];
+                    elementData[parentIndex] = elementData[curIndex];
+                    elementData[curIndex] = tmp;
+                    curIndex = parentIndex;
+                } else {
+                    return;
+                }
+            } while (parentIndex != 0);
+        }
     }
 
     private void siftDown() {
-        /**
-         * TODO: implement it — O(log n)
-         * Просеивание вниз
-         *  спуск элемента меньше детей
-         */
+        int p = 0;
+        while (p < size) {
+            int maxChild = 2 * p + 1; // l
+            if (maxChild >= size) {
+                return;
+            }
+            int r = 2 * p + 2;
+            if (r < size) {
+                if (greater(maxChild, r)) {
+                    maxChild = r;
+                }
+            }
+            if (greater(p, maxChild)) {
+                Key tmp = elementData[maxChild];
+                elementData[maxChild] = elementData[p];
+                elementData[p] = tmp;
+            }
+            p = maxChild;
+        }
     }
 
     private void grow() {
-        /**
-         * TODO: implement it
-         * Если массив заполнился,
-         * то увеличить его размер в полтора раз
-         */
+        if (size == elementData.length) {
+            int oldCapacity = elementData.length;
+            // <=> * 1.5
+            int newCapacity = oldCapacity + (oldCapacity >> 1);
+            changeCapacity(newCapacity);
+        }
     }
 
     private void shrink() {
-        /**
-         * TODO: implement it
-         * Если количество элементов в четыре раза меньше,
-         * то уменьшить его размер в два раза
-         */
+        int oldCapacity = elementData.length;
+        // не уменьшать размер меньше, чем размер по умолчанию
+        if (elementData.length >= DEFAULT_CAPACITY &&
+                size == oldCapacity >> 2) {
+            changeCapacity(oldCapacity >> 1);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private void changeCapacity(int newCapacity) {
+        elementData = Arrays.copyOf(elementData, newCapacity);
     }
 
     private boolean greater(int i, int j) {
         return comparator == null
                 ? elementData[i].compareTo(elementData[j]) > 0
-                : comparator.compare(elementData[i], elementData[j]) > 0
-                ;
+                : comparator.compare(elementData[i], elementData[j]) > 0;
     }
 
     @Override
     public Iterator<Key> iterator() {
-        /* TODO: implement it */
-        return null;
+        return new ArrayPriorityQueueIterator();
+    }
+
+    private class ArrayPriorityQueueIterator implements Iterator<Key> {
+        private int currentPosition = 0;
+
+        @Override
+        public boolean hasNext() {
+            return currentPosition + 1 != size;
+        }
+
+        @Override
+        public Key next() {
+            return elementData[currentPosition++];
+        }
+
     }
 }
