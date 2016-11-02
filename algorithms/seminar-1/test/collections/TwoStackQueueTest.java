@@ -1,32 +1,29 @@
-package test.collections;
+package collections;
 
-import collections.LinkedQueue;
 import org.junit.Test;
 
 import java.util.Iterator;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-public class LinkedQueueTest {
+public class TwoStackQueueTest {
     @Test
     public void constructor() {
-        final LinkedQueue queue = new LinkedQueue();
+        final TwoStackQueue queue = new TwoStackQueue();
         assertTrue(queue.isEmpty());
         assertEquals(0, queue.size());
     }
 
     @Test
     public void enqueueDequeue() {
-        final LinkedQueue<Integer> queue = new LinkedQueue<>();
+        final TwoStackQueue<Integer> queue = new TwoStackQueue<>();
         queue.enqueue(5);
         assertEquals(5, queue.dequeue().intValue());
     }
 
     @Test
     public void enqueueDequeueDouble() {
-        final LinkedQueue<Integer> queue = new LinkedQueue<>();
+        final TwoStackQueue<Integer> queue = new TwoStackQueue<>();
         queue.enqueue(5);
         assertEquals(5, queue.dequeue().intValue());
         queue.enqueue(7);
@@ -35,7 +32,7 @@ public class LinkedQueueTest {
 
     @Test
     public void size2() {
-        final LinkedQueue<Integer> queue = new LinkedQueue<>();
+        final TwoStackQueue<Integer> queue = new TwoStackQueue<>();
         queue.enqueue(5);
         queue.enqueue(7);
         assertEquals(2, queue.size());
@@ -45,7 +42,7 @@ public class LinkedQueueTest {
 
     @Test
     public void sizeIsEmpty() {
-        final LinkedQueue<Integer> queue = new LinkedQueue<>();
+        final TwoStackQueue<Integer> queue = new TwoStackQueue<>();
         queue.enqueue(5);
 
         assertEquals(1, queue.size());
@@ -58,7 +55,7 @@ public class LinkedQueueTest {
 
     @Test
     public void iterator() {
-        final LinkedQueue<Integer> queue = new LinkedQueue<>();
+        final TwoStackQueue<Integer> queue = new TwoStackQueue<>();
         queue.enqueue(5);
         queue.enqueue(7);
 
@@ -66,6 +63,25 @@ public class LinkedQueueTest {
         assertTrue(iterator.hasNext());
         assertEquals(5, iterator.next().intValue());
         assertEquals(7, iterator.next().intValue());
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void iteratorInTwoStack() {
+        final TwoStackQueue<Integer> queue = new TwoStackQueue<>();
+        queue.enqueue(5);
+        queue.enqueue(5);
+        queue.enqueue(7);
+        queue.dequeue();
+        queue.enqueue(9);
+        queue.enqueue(11);
+
+        final Iterator<Integer> iterator = queue.iterator();
+        assertTrue(iterator.hasNext());
+        assertEquals(5, iterator.next().intValue());
+        assertEquals(7, iterator.next().intValue());
+        assertEquals(9, iterator.next().intValue());
+        assertEquals(11, iterator.next().intValue());
         assertFalse(iterator.hasNext());
     }
 }

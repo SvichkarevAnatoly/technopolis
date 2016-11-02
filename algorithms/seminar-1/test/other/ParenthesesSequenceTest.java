@@ -1,12 +1,12 @@
-package test.other;
+package other;
 
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static other.ParenthesesSequenceExt.isBalanced;
+import static other.ParenthesesSequence.isBalanced;
 
-public class ParenthesesSequenceExtTest {
+public class ParenthesesSequenceTest {
     @Test
     public void isBalanced1() {
         final String sequence = "()()";
@@ -15,13 +15,13 @@ public class ParenthesesSequenceExtTest {
 
     @Test
     public void isBalanced2() {
-        final String sequence = "(({}[]))[[[";
+        final String sequence = "((((";
         assertFalse(isBalanced(sequence));
     }
 
     @Test
     public void isBalanced3() {
-        final String sequence = "{}";
-        assertTrue(isBalanced(sequence));
+        final String sequence = ")()(";
+        assertFalse(isBalanced(sequence));
     }
 }

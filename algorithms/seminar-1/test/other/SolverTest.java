@@ -1,7 +1,6 @@
-package test.other;
+package other;
 
 import org.junit.Test;
-import other.Solver;
 
 import static org.junit.Assert.assertEquals;
 

@@ -1,6 +1,5 @@
-package test.collections;
+package collections;
 
-import collections.CyclicArrayQueue;
 import org.junit.Test;
 
 import java.util.Iterator;

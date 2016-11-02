@@ -1,6 +1,5 @@
-package test.collections;
+package collections;
 
-import collections.CyclicArrayDeque;
 import org.junit.Before;
 import org.junit.Test;
 

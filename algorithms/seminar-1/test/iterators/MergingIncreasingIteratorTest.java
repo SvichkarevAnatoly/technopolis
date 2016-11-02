@@ -1,14 +1,10 @@
-package test.iterators;
+package iterators;
 
-import iterators.IncreasingIterator;
-import iterators.MergingIncreasingIterator;
 import org.junit.Test;
 
 import java.util.Random;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class MergingIncreasingIteratorTest {
     @Test

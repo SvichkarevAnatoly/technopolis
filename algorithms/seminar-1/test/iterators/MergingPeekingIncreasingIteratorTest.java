@@ -1,6 +1,5 @@
-package test.iterators;
+package iterators;
 
-import iterators.*;
 import org.junit.Test;
 
 import java.util.Random;
