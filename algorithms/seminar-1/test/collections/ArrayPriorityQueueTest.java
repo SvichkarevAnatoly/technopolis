@@ -58,4 +58,18 @@ public class ArrayPriorityQueueTest {
         assertEquals(1, iterator.next().intValue());
         assertEquals(2, iterator.next().intValue());
     }
+
+    @Test
+    public void build() {
+        final Integer[] ints = {5, 3, 9, 6, 8, -2, 1};
+        heap = new ArrayPriorityQueue<>(ints);
+
+        assertEquals(-2, heap.extractMin().intValue());
+        assertEquals(1, heap.extractMin().intValue());
+        assertEquals(3, heap.extractMin().intValue());
+        assertEquals(5, heap.extractMin().intValue());
+        assertEquals(6, heap.extractMin().intValue());
+        assertEquals(8, heap.extractMin().intValue());
+        assertEquals(9, heap.extractMin().intValue());
+    }
 }

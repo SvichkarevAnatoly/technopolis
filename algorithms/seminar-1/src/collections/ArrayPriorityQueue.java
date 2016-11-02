@@ -6,16 +6,28 @@ import java.util.Iterator;
 
 public class ArrayPriorityQueue<Key extends Comparable<Key>> implements IPriorityQueue<Key> {
     private static final int DEFAULT_CAPACITY = 10;
-    @SuppressWarnings("unchecked")
-    private Key[] elementData = (Key[]) new Comparable[DEFAULT_CAPACITY];
+
+    private Key[] elementData;
     private Comparator<Key> comparator;
     private int size;
 
+    @SuppressWarnings("unchecked")
     public ArrayPriorityQueue() {
+        elementData = (Key[]) new Comparable[DEFAULT_CAPACITY];
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayPriorityQueue(Comparator<Key> comparator) {
+        elementData = (Key[]) new Comparable[DEFAULT_CAPACITY];
         this.comparator = comparator;
+    }
+
+    @SuppressWarnings("unchecked")
+    public ArrayPriorityQueue(Key[] keys) {
+        size = keys.length;
+        elementData = (Key[]) new Comparable[size];
+        System.arraycopy(keys, 0, elementData, 0, size);
+        build();
     }
 
     @Override
@@ -35,7 +47,7 @@ public class ArrayPriorityQueue<Key extends Comparable<Key>> implements IPriorit
         shrink();
         Key max = elementData[0];
         elementData[0] = elementData[--size];
-        siftDown();
+        siftDown(0);
         return max;
     }
 
@@ -47,6 +59,12 @@ public class ArrayPriorityQueue<Key extends Comparable<Key>> implements IPriorit
     @Override
     public int size() {
         return size;
+    }
+
+    private void build() {
+        for (int i = size / 2; i >= 0; i--) {
+            siftDown(i);
+        }
     }
 
     private void siftUp() {
@@ -67,8 +85,8 @@ public class ArrayPriorityQueue<Key extends Comparable<Key>> implements IPriorit
         }
     }
 
-    private void siftDown() {
-        int p = 0;
+    private void siftDown(int i) {
+        int p = i;
         while (p < size) {
             int maxChild = 2 * p + 1; // l
             if (maxChild >= size) {

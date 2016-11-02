@@ -20,12 +20,7 @@ public class MergingPeekingIncreasingIterator implements Iterator<Integer> {
 
     @SafeVarargs
     public MergingPeekingIncreasingIterator(IPeekingComparableIterator<Integer> ... peekingIterators) {
-        heap = new ArrayPriorityQueue<>();
-        for (IPeekingComparableIterator<Integer> iterator : peekingIterators) {
-            if (iterator.hasNext()) {
-                heap.add(iterator);
-            }
-        }
+        heap = new ArrayPriorityQueue<>(peekingIterators);
     }
 
     @Override
