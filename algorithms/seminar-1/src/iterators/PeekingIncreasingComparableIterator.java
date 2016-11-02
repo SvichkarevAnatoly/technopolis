@@ -2,16 +2,16 @@ package iterators;
 
 import java.util.Random;
 
-public class PeekingIncreasingIterator extends IncreasingIterator implements IPeekingIterator<Integer> {
+public class PeekingIncreasingComparableIterator extends IncreasingIterator implements IPeekingComparableIterator<Integer> {
 
     private boolean hasPeeked;
     private Integer peekedElement;
 
-    public PeekingIncreasingIterator(int start, int maxGrowth, int stepLimit) {
+    public PeekingIncreasingComparableIterator(int start, int maxGrowth, int stepLimit) {
         super(start, maxGrowth, stepLimit);
     }
 
-    public PeekingIncreasingIterator(int start, int maxGrowth, int stepLimit, Random random) {
+    public PeekingIncreasingComparableIterator(int start, int maxGrowth, int stepLimit, Random random) {
         super(start, maxGrowth, stepLimit, random);
     }
 
@@ -38,5 +38,10 @@ public class PeekingIncreasingIterator extends IncreasingIterator implements IPe
             hasPeeked = true;
         }
         return peekedElement;
+    }
+
+    @Override
+    public int compareTo(IPeekingComparableIterator<Integer> o) {
+        return peek().compareTo(o.peek());
     }
 }

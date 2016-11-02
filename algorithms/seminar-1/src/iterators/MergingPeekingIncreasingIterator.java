@@ -1,8 +1,9 @@
 package iterators;
 
-import java.util.Comparator;
+import collections.ArrayPriorityQueue;
+import collections.IPriorityQueue;
+
 import java.util.Iterator;
-import java.util.PriorityQueue;
 
 /**
  * Итератор возвращающий последовательность из N возрастающих итераторов в порядке возрастания
@@ -15,13 +16,12 @@ import java.util.PriorityQueue;
  *  k — суммарное количество элементов
  */
 public class MergingPeekingIncreasingIterator implements Iterator<Integer> {
-    private final PriorityQueue<IPeekingIterator<Integer>> heap;
+    private final IPriorityQueue<IPeekingComparableIterator<Integer>> heap;
 
     @SafeVarargs
-    public MergingPeekingIncreasingIterator(IPeekingIterator<Integer> ... peekingIterators) {
-        Comparator<IPeekingIterator<Integer>> comparator = (p1, p2) -> p1.peek().compareTo(p2.peek());
-        this.heap = new PriorityQueue<>(peekingIterators.length, comparator);
-        for (IPeekingIterator<Integer> iterator : peekingIterators) {
+    public MergingPeekingIncreasingIterator(IPeekingComparableIterator<Integer> ... peekingIterators) {
+        heap = new ArrayPriorityQueue<>();
+        for (IPeekingComparableIterator<Integer> iterator : peekingIterators) {
             if (iterator.hasNext()) {
                 heap.add(iterator);
             }
@@ -35,7 +35,7 @@ public class MergingPeekingIncreasingIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        final IPeekingIterator<Integer> min = heap.remove();
+        final IPeekingComparableIterator<Integer> min = heap.extractMin();
         final Integer nextValue = min.next();
         if (min.hasNext()) {
             heap.add(min);
