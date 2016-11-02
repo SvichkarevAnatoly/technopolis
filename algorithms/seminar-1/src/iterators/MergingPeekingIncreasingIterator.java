@@ -2,6 +2,7 @@ package iterators;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.PriorityQueue;
 
 /**
  * Итератор возвращающий последовательность из N возрастающих итераторов в порядке возрастания
@@ -14,41 +15,31 @@ import java.util.Iterator;
  *  k — суммарное количество элементов
  */
 public class MergingPeekingIncreasingIterator implements Iterator<Integer> {
-    private final Comparator<IPeekingIterator<Integer>> comparator = (p1, p2) -> p1.peek().compareTo(p2.peek());
-    private final IPeekingIterator<Integer>[] iterators;
+    private final PriorityQueue<IPeekingIterator<Integer>> heap;
 
     @SafeVarargs
     public MergingPeekingIncreasingIterator(IPeekingIterator<Integer> ... peekingIterators) {
-        this.iterators = peekingIterators;
+        Comparator<IPeekingIterator<Integer>> comparator = (p1, p2) -> p1.peek().compareTo(p2.peek());
+        this.heap = new PriorityQueue<>(peekingIterators.length, comparator);
+        for (IPeekingIterator<Integer> iterator : peekingIterators) {
+            if (iterator.hasNext()) {
+                heap.add(iterator);
+            }
+        }
     }
 
     @Override
     public boolean hasNext() {
-        for (IPeekingIterator iterator : iterators) {
-            if (iterator.hasNext()) {
-                return true;
-            }
-        }
-        return false;
+        return !heap.isEmpty();
     }
 
     @Override
     public Integer next() {
-        IPeekingIterator<Integer> minElementIterator = null;
-        for (IPeekingIterator<Integer> iterator : iterators) {
-            if (iterator.hasNext()) {
-                minElementIterator = iterator;
-                break;
-            }
+        final IPeekingIterator<Integer> min = heap.remove();
+        final Integer nextValue = min.next();
+        if (min.hasNext()) {
+            heap.add(min);
         }
-
-        for (IPeekingIterator<Integer> iterator : iterators) {
-            if (iterator.hasNext()) {
-                if(comparator.compare(iterator, minElementIterator) < 0){
-                    minElementIterator = iterator;
-                }
-            }
-        }
-        return minElementIterator.next();
+        return nextValue;
     }
 }
