@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class QuickSort {
@@ -77,33 +76,25 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
+        final int MAX_SIZE = 100000;
+
         final FastScanner scanner = new FastScanner();
-        final ArrayList<Integer> arrList = new ArrayList<>();
+        final int[] arr = new int[MAX_SIZE];
+
+        int i = 0;
         while (scanner.hasNext()) {
-            final int x = scanner.nextInt();
-            arrList.add(x);
+            arr[i++] = scanner.nextInt();
         }
-        int[] arr = toIntArray(arrList);
 
-        sort(arr);
+        sort(arr, 0, i - 1);
 
-        printArray(arr);
+        printArray(arr, i);
     }
 
-    private static int[] toIntArray(ArrayList<Integer> arrList) {
-        int[] arr = new int[arrList.size()];
-        for(int i = 0; i < arrList.size(); i++) {
-            if (arrList.get(i) != null) {
-                arr[i] = arrList.get(i);
-            }
-        }
-        return arr;
-    }
-
-    private static void printArray(int[] arr) {
-        final StringBuilder sb = new StringBuilder(2 * arr.length);
-        for (int anArr : arr) {
-            sb.append(anArr).append(' ');
+    private static void printArray(int[] arr, int size) {
+        final StringBuilder sb = new StringBuilder(2 * size);
+        for (int i = 0; i < size; i++) {
+            sb.append(arr[i]).append(' ');
         }
         System.out.println(sb.toString().trim());
     }
