@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 public class QuickSort {
@@ -18,22 +20,21 @@ public class QuickSort {
         sort(arr, p + 1, hi);
     }
 
-    private static int partition(int[] arr, int lo, int hi) {
-        int pivotIndex = lo - (lo - hi) / 2;
-        int i = lo;
-        int j = hi;
-        while (i < j) {
-            while (i < pivotIndex && (arr[i] <= arr[pivotIndex])) i++;
-            while (j > pivotIndex && (arr[pivotIndex] <= arr[j])) j--;
-            if (i < j) {
-                swap(arr, i, j);
-                if (i == pivotIndex)
-                    pivotIndex = j;
-                else if (j == pivotIndex)
-                    pivotIndex = i;
+    private static int partition(int[] arr, int left, int right) {
+        int pivot = arr[right];
+        int leftCursor = left - 1;
+        int rightCursor = right;
+        while (leftCursor < rightCursor) {
+            while (arr[++leftCursor] < pivot) ;
+            while (rightCursor > 0 && arr[--rightCursor] > pivot) ;
+            if (leftCursor >= rightCursor) {
+                break;
+            } else {
+                swap(arr, leftCursor, rightCursor);
             }
         }
-        return j;
+        swap(arr, leftCursor, right);
+        return leftCursor;
     }
 
     private static void swap(int[] arr, int i, int j) {
@@ -86,16 +87,28 @@ public class QuickSort {
             arr[i++] = scanner.nextInt();
         }
 
+        shuffle(arr, i);
         sort(arr, 0, i - 1);
 
         printArray(arr, i);
     }
 
-    private static void printArray(int[] arr, int size) {
-        final StringBuilder sb = new StringBuilder(2 * size);
-        for (int i = 0; i < size; i++) {
-            sb.append(arr[i]).append(' ');
+    private static void shuffle(int[] arr, int size) {
+        final Random random = new Random(0);
+        for (int i = 0; i < size / 2; i++) {
+            final int j = random.nextInt(size);
+            final int tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
         }
-        System.out.println(sb.toString().trim());
+    }
+
+    private static void printArray(int[] arr, int size) {
+        final PrintWriter printWriter = new PrintWriter(System.out);
+        for (int i = 0; i < size; i++) {
+            printWriter.print(arr[i]);
+            printWriter.print(' ');
+        }
+        printWriter.close();
     }
 }
