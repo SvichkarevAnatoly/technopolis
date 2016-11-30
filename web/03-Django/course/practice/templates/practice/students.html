@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html>
+<body>
+
 {% if student_list %}
     <ul>
     {% for student in student_list %}
@@ -11,3 +15,9 @@
 {% else %}
     <p>No students are available.</p>
 {% endif %}
+
+<button type="button" onclick="window.location = '{% url 'practice:add_student' %}'">Add</button>
+{#<a role="button" href="{% url 'practice:add_student' %}">Add</a>#}
+
+</body>
+</html>
