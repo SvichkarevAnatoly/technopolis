@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit student</title>
+</head>
+<body>
+
+<form action="{% url 'practice:add_student' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="name"><br>
+    <input type="text" name="family"><br>
+    <input type="submit" value="Save"/>
+</form>
+
+</body>
+</html>

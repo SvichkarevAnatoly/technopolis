@@ -12,6 +12,21 @@ def get_student_list(request):
     return render(request, "practice/students.html", context)
 
 
+def add_student(request):
+    if request.method == 'GET':
+        return render(request, 'practice/add_student.html')
+    else:
+        try:
+            name = request.POST['name']
+            family = request.POST['family']
+            student = Student(name=name, family=family)
+            student.save()
+        except KeyError:
+            return render(request, 'practice/add_student.html')
+        else:
+            return HttpResponseRedirect(reverse('practice:student'))
+
+
 def edit_student(request, id):
     student = get_object_or_404(Student, pk=id)
     context = {'student': student}
