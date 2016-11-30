@@ -1,5 +1,9 @@
 from django.http import HttpResponse
 
+from .models import Student
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the course")
+
+def students(request):
+    student_list = Student.objects.all()
+    output = "<br>".join(map(str, student_list))
+    return HttpResponse(output)
