@@ -1,7 +1,11 @@
 {% if student_list %}
     <ul>
     {% for student in student_list %}
-        <li>{{ student.name }} {{ student.family }}</li>
+        <li>
+            <a href="{% url 'practice:edit_student' student.id %}">
+                {{ student }}
+            </a>
+        </li>
     {% endfor %}
     </ul>
 {% else %}
