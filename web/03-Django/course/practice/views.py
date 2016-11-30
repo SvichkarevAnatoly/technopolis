@@ -8,7 +8,6 @@ from .models import Student
 def get_student_list(request):
     student_list = Student.objects.all()
     context = {'student_list': student_list}
-
     return render(request, "practice/students.html", context)
 
 
@@ -44,3 +43,9 @@ def save_student(request, id):
         return render(request, 'practice/edit_student.html', context)
     else:
         return HttpResponseRedirect(reverse('practice:student'))
+
+
+def delete_student(request, id):
+    student = get_object_or_404(Student, pk=id)
+    student.delete()
+    return HttpResponseRedirect(reverse('practice:student'))
