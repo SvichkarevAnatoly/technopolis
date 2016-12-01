@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Edit student</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Basic Bootstrap Template</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-
-<form action="{% url 'practice:save_student' student.id %}" method="post">
-    {% csrf_token %}
-    <input type="text"
-           name="name" value="{{ student.name }}"><br>
-    <input type="text"
-           name="family" value="{{ student.family }}"><br>
-    <input type="submit" value="Save"/>
-</form>
-
-<form action="{% url 'practice:delete_student' student.id %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Delete" />
-</form>
-
+<div class="container">
+    <h1>Edit Student</h1>
+    <form action="{% url 'practice:save_student' student.id %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Email address</label>
+            <input type="text" class="form-control"
+                   name="name" value="{{ student.name }}">
+        </div>
+        <div class="form-group">
+            <label>Email address</label>
+            <input type="text" class="form-control"
+                   name="family" value="{{ student.family }}">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Save"/>
+        <a class="btn btn-primary" href="{% url 'practice:delete_student' student.id %}" role="button">Delete</a>
+        <a class="btn btn-primary" href="{% url 'practice:add_student' %}" role="button">Add new</a>
+    </form>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 </body>
 </html>
