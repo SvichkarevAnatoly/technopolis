@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Basic Bootstrap Template</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
 <body>
+<div class="container">
+    <h1>Student table</h1>
+    {% if student_list %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Family</th>
+                </tr>
+                {% for student in student_list %}
+                    <tr onclick="window.location = '{% url 'practice:edit_student' student.id %}'">
+                        <th>{{ student.id }}</th>
+                        <th>{{ student.name }}</th>
+                        <th>{{ student.family }}</th>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% else %}
+        <p>No students are available.</p>
+    {% endif %}
 
-{% if student_list %}
-    <ul>
-    {% for student in student_list %}
-        <li>
-            <a href="{% url 'practice:edit_student' student.id %}">
-                {{ student }}
-            </a>
-        </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No students are available.</p>
-{% endif %}
-
-<button type="button" onclick="window.location = '{% url 'practice:add_student' %}'">Add</button>
-{#<a role="button" href="{% url 'practice:add_student' %}">Add</a>#}
-
+    <a class="btn btn-primary" href="{% url 'practice:add_student' %}" role="button">Add new Student</a>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 </body>
 </html>
