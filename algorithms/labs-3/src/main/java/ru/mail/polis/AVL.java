@@ -24,8 +24,21 @@ public class AVL implements Tree {
         return false;
     }
 
-    Node getRoot() {
-        return root;
+    static Node balance(Node p) {
+        p.fixHeight();
+        if (p.balanceFactor() == 2) {
+            if (p.right.balanceFactor() < 0) {
+                p.right = rotateRight(p.right);
+            }
+            return rotateLeft(p);
+        }
+        if (p.balanceFactor() == -2) {
+            if (p.left.balanceFactor() > 0) {
+                p.left = rotateLeft(p.left);
+            }
+            return rotateRight(p);
+        }
+        return p;
     }
 
     static Node rotateRight(Node p) {

@@ -75,4 +75,19 @@ public class AVLTest {
 
         assertThat(rotatedTree, is(expectedTree));
     }
+
+    @Test
+    public void balance() throws Exception {
+        // p a -1 -1 q s b -1 -1 c -1 -1 d -1 -1
+        final String treeString = "5 2 -1 -1 10 4 3 -1 -1 6 -1 -1 12 -1 -1";
+        final AVL.Node tree = AVLHelper.deserialize(treeString);
+
+        final AVL.Node balancedTree = AVL.balance(tree);
+
+        // s p a -1 -1 b -1 -1 q c -1 -1 d -1 -1
+        final String expectedTreeString = "4 5 2 -1 -1 3 -1 -1 10 6 -1 -1 12 -1 -1";
+        final AVL.Node expectedTree = AVLHelper.deserialize(expectedTreeString);
+
+        assertThat(balancedTree, is(expectedTree));
+    }
 }
