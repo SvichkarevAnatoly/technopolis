@@ -6,12 +6,37 @@ import java.util.Objects;
 public class AVL implements Tree {
     private Node root;
 
-    public AVL() {
-    }
-
     @Override
     public boolean add(int key) {
-        return false;
+        if (root == null) {
+            root = new Node(key);
+            return true;
+        }
+        return insert(root, key);
+    }
+
+    private boolean insert(Node node, int key) {
+        boolean isInserted;
+        if (key == node.key) {
+            return false;
+        } else if (key < node.key) {
+            if (node.left != null) {
+                isInserted = insert(node.left, key);
+                node.left = balance(node.left);
+            } else {
+                node.left = new Node(key);
+                return true;
+            }
+        } else {
+            if (node.right != null) {
+                isInserted = insert(node.right, key);
+                node.right = balance(node.right);
+            } else {
+                node.right = new Node(key);
+                return true;
+            }
+        }
+        return isInserted;
     }
 
     @Override
@@ -21,6 +46,16 @@ public class AVL implements Tree {
 
     @Override
     public boolean find(int key) {
+        Node cur = this.root;
+        while (cur != null) {
+            if (key == cur.key) {
+                return true;
+            } else if(key < cur.key){
+                cur = cur.left;
+            } else {
+                cur = cur.right;
+            }
+        }
         return false;
     }
 
@@ -57,6 +92,10 @@ public class AVL implements Tree {
         q.fixHeight();
         p.fixHeight();
         return p;
+    }
+
+    public Node getRoot() {
+        return root;
     }
 
     static class Node {
