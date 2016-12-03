@@ -90,4 +90,35 @@ public class AVLTest {
 
         assertThat(balancedTree, is(expectedTree));
     }
+
+    @Test
+    public void addOne() throws Exception {
+        final Tree avl = new AVL();
+        final boolean wasAdded = avl.add(5);
+
+        assertThat(wasAdded, is(true));
+    }
+
+    @Test
+    public void addTwo() throws Exception {
+        final Tree avl = new AVL();
+        boolean wasAdded = avl.add(5);
+        wasAdded &= avl.add(3);
+
+        assertThat(wasAdded, is(true));
+    }
+
+    @Test
+    public void addFourAndRotate() throws Exception {
+        final AVL tree = new AVL();
+        boolean wasAdded = tree.add(3);
+        wasAdded &= tree.add(2);
+        wasAdded &= tree.add(1);
+
+        assertThat(wasAdded, is(true));
+
+        final String treeString = AVLHelper.serialize(tree);
+        final String expectedTree = "2 1 -1 -1 3 -1 -1";
+        assertThat(treeString, is(expectedTree));
+    }
 }
