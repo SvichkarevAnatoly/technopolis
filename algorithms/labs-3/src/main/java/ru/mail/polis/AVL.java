@@ -6,6 +6,13 @@ import java.util.Objects;
 public class AVL implements Tree {
     private Node root;
 
+    public AVL() {
+    }
+
+    public AVL(Node root) {
+        this.root = root;
+    }
+
     @Override
     public boolean add(int key) {
         if (root == null) {
@@ -15,6 +22,64 @@ public class AVL implements Tree {
         boolean isInserted = insert(root, key);
         root = balance(root);
         return isInserted;
+    }
+
+    @Override
+    public void delete(int key) {
+        root = remove(root, key);
+    }
+
+    @Override
+    public boolean find(int key) {
+        Node cur = this.root;
+        while (cur != null) {
+            if (key == cur.key) {
+                return true;
+            } else if (key < cur.key) {
+                cur = cur.left;
+            } else {
+                cur = cur.right;
+            }
+        }
+        return false;
+    }
+
+    Node findMin(Node p) {
+        if (p.left != null) {
+            return findMin(p.left);
+        }
+        return p;
+    }
+
+    Node removeMin(Node p) {
+        if (p.left == null) {
+            return p.right;
+        }
+        p.left = removeMin(p.left);
+        return balance(p);
+    }
+
+    Node remove(Node p, int key) {
+        if (p == null) {
+            return null;
+        }
+
+        if (key < p.getKey()) {
+            p.left = remove(p.left, key);
+        } else if (key > p.getKey()) {
+            p.right = remove(p.right, key);
+        } else {
+            Node q = p.left;
+            Node r = p.right;
+            if (r == null) {
+                return q;
+            }
+            Node min = findMin(r);
+            min.right = removeMin(r);
+            min.left = q;
+            return balance(min);
+        }
+        return balance(p);
     }
 
     private boolean insert(Node node, int key) {
@@ -39,26 +104,6 @@ public class AVL implements Tree {
             }
         }
         return isInserted;
-    }
-
-    @Override
-    public void delete(int key) {
-
-    }
-
-    @Override
-    public boolean find(int key) {
-        Node cur = this.root;
-        while (cur != null) {
-            if (key == cur.key) {
-                return true;
-            } else if(key < cur.key){
-                cur = cur.left;
-            } else {
-                cur = cur.right;
-            }
-        }
-        return false;
     }
 
     static Node balance(Node p) {

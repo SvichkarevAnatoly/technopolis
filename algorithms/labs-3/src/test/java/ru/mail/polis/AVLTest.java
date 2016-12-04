@@ -151,4 +151,70 @@ public class AVLTest {
         assertThat(tree.find(0), is(false));
         assertThat(tree.find(5), is(false));
     }
+
+    @Test
+    public void deleteOneNodeTree() throws Exception {
+        Tree tree = new AVL();
+        tree.add(1);
+        assertThat(tree.find(1), is(true));
+        tree.delete(1);
+        assertThat(tree.find(1), is(false));
+    }
+
+    @Test
+    public void deleteTwoNodeTree() throws Exception {
+        String treeString = "2 -1 1 -1 -1";
+        AVL.Node root = AVLHelper.deserialize(treeString);
+        Tree tree = new AVL(root);
+
+        assertThat(tree.find(2), is(true));
+        tree.delete(2);
+        assertThat(tree.find(2), is(false));
+        assertThat(tree.find(1), is(true));
+    }
+
+    @Test
+    public void deleteRootInBigTree() throws Exception {
+        final String treeString = "10 5 3 -1 -1 7 -1 -1 20 15 12 -1 -1 17 -1 -1 25 -1 -1";
+        final AVL.Node root = AVLHelper.deserialize(treeString);
+        final AVL tree = new AVL(root);
+
+        tree.delete(10);
+
+        final String expectedTreeString= "12 5 3 -1 -1 7 -1 -1 20 15 -1 17 -1 -1 25 -1 -1 ";
+        assertThat(AVLHelper.serialize(tree), is(expectedTreeString));
+    }
+
+    @Test
+    public void deleteRootLeftChildInBigTree() throws Exception {
+        final AVL tree = new AVL();
+        for (int i = 2; i <= 10; i++) {
+            tree.add(i);
+        }
+
+        assertThat(tree.find(7), is(true));
+        tree.delete(7);
+        assertThat(tree.find(7), is(false));
+
+        assertThat(AVLHelper.serialize(tree), is("5 3 2 -1 -1 4 -1 -1 8 6 -1 -1 9 -1 10 -1 -1 "));
+    }
+
+    @Test
+    public void add10Delete10() throws Exception {
+        final AVL tree = new AVL();
+        for (int i = 1; i <= 10; i++) {
+            tree.add(i);
+        }
+
+        for (int i = 1; i <= 10; i++) {
+            assertThat(tree.find(i), is(true));
+        }
+
+        for (int i = 1; i <= 10; i++) {
+            tree.delete(i);
+            assertThat(tree.find(i), is(false));
+        }
+
+        assertThat(AVLHelper.serialize(tree), is("-1 "));
+    }
 }
