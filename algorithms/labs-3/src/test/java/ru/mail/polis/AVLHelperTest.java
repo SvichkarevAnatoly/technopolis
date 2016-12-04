@@ -11,7 +11,7 @@ public class AVLHelperTest {
         final AVL.Node node = new AVL.Node(5);
         final String serialize = AVLHelper.serialize(node);
 
-        assertThat(serialize, is("5 -1 -1 "));
+        assertThat(serialize, is("5 -1 -1"));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class AVLHelperTest {
         final AVL.Node n12 = new AVL.Node(12, n13, null);
 
         final String serialize = AVLHelper.serialize(n12);
-        assertThat(serialize, is("12 13 -1 -1 -1 "));
+        assertThat(serialize, is("12 13 -1 -1 -1"));
     }
 
     @Test
@@ -69,7 +69,7 @@ public class AVLHelperTest {
         final AVL.Node n20 = new AVL.Node(20, n8, null);
 
         final String serialize = AVLHelper.serialize(n20);
-        assertThat(serialize, is("20 8 4 -1 -1 12 10 -1 -1 14 -1 -1 -1 "));
+        assertThat(serialize, is("20 8 4 -1 -1 12 10 -1 -1 14 -1 -1 -1"));
     }
 
     @Test
