@@ -136,4 +136,19 @@ public class AVLTest {
         final String expectedTree = "3 2 1 -1 -1 -1 4 -1 -1 ";
         assertThat(treeString, is(expectedTree));
     }
+
+    @Test
+    public void add4andFind() throws Exception {
+        final AVL tree = new AVL();
+        tree.add(4);
+        tree.add(3);
+        tree.add(2);
+        tree.add(1);
+
+        for (int i = 1; i <= 4; i++) {
+            assertThat(tree.find(i), is(true));
+        }
+        assertThat(tree.find(0), is(false));
+        assertThat(tree.find(5), is(false));
+    }
 }
