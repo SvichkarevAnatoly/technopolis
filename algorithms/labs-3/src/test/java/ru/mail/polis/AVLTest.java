@@ -109,7 +109,7 @@ public class AVLTest {
     }
 
     @Test
-    public void addFourAndRotate() throws Exception {
+    public void add3AndRotate() throws Exception {
         final AVL tree = new AVL();
         boolean wasAdded = tree.add(3);
         wasAdded &= tree.add(2);
@@ -118,7 +118,22 @@ public class AVLTest {
         assertThat(wasAdded, is(true));
 
         final String treeString = AVLHelper.serialize(tree);
-        final String expectedTree = "2 1 -1 -1 3 -1 -1";
+        final String expectedTree = "2 1 -1 -1 3 -1 -1 ";
+        assertThat(treeString, is(expectedTree));
+    }
+
+    @Test
+    public void add5NodesAndRotate() throws Exception {
+        final AVL tree = new AVL();
+        boolean wasAdded = tree.add(4);
+        wasAdded &= tree.add(3);
+        wasAdded &= tree.add(2);
+        wasAdded &= tree.add(1);
+
+        assertThat(wasAdded, is(true));
+
+        final String treeString = AVLHelper.serialize(tree);
+        final String expectedTree = "3 2 1 -1 -1 -1 4 -1 -1 ";
         assertThat(treeString, is(expectedTree));
     }
 }

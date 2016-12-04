@@ -12,7 +12,9 @@ public class AVL implements Tree {
             root = new Node(key);
             return true;
         }
-        return insert(root, key);
+        boolean isInserted = insert(root, key);
+        root = balance(root);
+        return isInserted;
     }
 
     private boolean insert(Node node, int key) {
