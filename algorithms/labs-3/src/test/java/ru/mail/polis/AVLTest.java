@@ -123,7 +123,7 @@ public class AVLTest {
     }
 
     @Test
-    public void add5NodesAndRotate() throws Exception {
+    public void add4NodesAndRotate() throws Exception {
         final AVL tree = new AVL();
         boolean wasAdded = tree.add(4);
         wasAdded &= tree.add(3);
