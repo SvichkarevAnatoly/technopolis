@@ -6,16 +6,14 @@ public class AVLHelper {
     private static final int EMPTY_MARKER = -1;
 
     public static String serialize(AVL tree) {
-        final StringBuilder sb = new StringBuilder();
         final AVL.Node root = tree.getRoot();
-        serialize(root, sb);
-        return sb.toString();
+        return serialize(root);
     }
 
     public static String serialize(AVL.Node root) {
         final StringBuilder sb = new StringBuilder();
         serialize(root, sb);
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     private static void serialize(AVL.Node node, StringBuilder sb) {

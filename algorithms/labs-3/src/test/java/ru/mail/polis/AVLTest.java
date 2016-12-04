@@ -118,7 +118,7 @@ public class AVLTest {
         assertThat(wasAdded, is(true));
 
         final String treeString = AVLHelper.serialize(tree);
-        final String expectedTree = "2 1 -1 -1 3 -1 -1 ";
+        final String expectedTree = "2 1 -1 -1 3 -1 -1";
         assertThat(treeString, is(expectedTree));
     }
 
@@ -133,7 +133,7 @@ public class AVLTest {
         assertThat(wasAdded, is(true));
 
         final String treeString = AVLHelper.serialize(tree);
-        final String expectedTree = "3 2 1 -1 -1 -1 4 -1 -1 ";
+        final String expectedTree = "3 2 1 -1 -1 -1 4 -1 -1";
         assertThat(treeString, is(expectedTree));
     }
 
@@ -181,7 +181,7 @@ public class AVLTest {
 
         tree.delete(10);
 
-        final String expectedTreeString= "12 5 3 -1 -1 7 -1 -1 20 15 -1 17 -1 -1 25 -1 -1 ";
+        final String expectedTreeString= "12 5 3 -1 -1 7 -1 -1 20 15 -1 17 -1 -1 25 -1 -1";
         assertThat(AVLHelper.serialize(tree), is(expectedTreeString));
     }
 
@@ -196,7 +196,7 @@ public class AVLTest {
         tree.delete(7);
         assertThat(tree.find(7), is(false));
 
-        assertThat(AVLHelper.serialize(tree), is("5 3 2 -1 -1 4 -1 -1 8 6 -1 -1 9 -1 10 -1 -1 "));
+        assertThat(AVLHelper.serialize(tree), is("5 3 2 -1 -1 4 -1 -1 8 6 -1 -1 9 -1 10 -1 -1"));
     }
 
     @Test
@@ -215,6 +215,6 @@ public class AVLTest {
             assertThat(tree.find(i), is(false));
         }
 
-        assertThat(AVLHelper.serialize(tree), is("-1 "));
+        assertThat(AVLHelper.serialize(tree), is("-1"));
     }
 }
