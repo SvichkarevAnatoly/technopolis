@@ -1,4 +1,6 @@
-package ru.mail.polis;
+package ru.mail.polis.tree.avl;
+
+import ru.mail.polis.tree.Tree;
 
 import java.util.Objects;
 

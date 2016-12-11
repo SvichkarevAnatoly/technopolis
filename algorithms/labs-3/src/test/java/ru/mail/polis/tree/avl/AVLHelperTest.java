@@ -1,6 +1,8 @@
-package ru.mail.polis;
+package ru.mail.polis.tree.avl;
 
 import org.junit.Test;
+import ru.mail.polis.tree.avl.AVL;
+import ru.mail.polis.tree.avl.AVLHelper;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;

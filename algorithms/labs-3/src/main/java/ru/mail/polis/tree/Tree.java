@@ -1,4 +1,4 @@
-package ru.mail.polis;
+package ru.mail.polis.tree;
 
 public interface Tree {
     boolean add(int key);
